@@ -59,7 +59,7 @@ class FileUploadView(APIView):
     def post(self, request, *args, **kwargs):
         file_obj = request.data['file']
         obj = Resource.objects.filter(rid=kwargs["rid"], publisher_id=kwargs["pk"])
-        folder = os.path.join(settings.MEDIA_ROOT, 'resource', 'user_{}'.format(kwargs.get("pk")))
+        folder = os.path.join(os.getenv('SHARE_PATH'), 'resource', 'user_{}'.format(kwargs.get("pk")))
         if not os.path.exists(folder):
             os.makedirs(folder)
         filename = 'resource_{}.'.format(kwargs.get("rid")) + kwargs.get("filename").split(".")[-1]
@@ -96,7 +96,7 @@ class AvatarUploadView(ModelViewSet):
         instance = self.get_queryset()
         instance = instance.filter(uid=kwargs.get("pk"))
 
-        folder = os.path.join(settings.MEDIA_ROOT, 'avatar', 'user_{}'.format(kwargs.get("pk")))
+        folder = os.path.join(os.getenv('SHARE_PATH'), 'avatar', 'user_{}'.format(kwargs.get("pk")))
         if not os.path.exists(folder):
             os.makedirs(folder)
 
