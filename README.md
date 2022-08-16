@@ -1,2 +1,2 @@
-# Pet_Social nginx config
+# Pet_Social
 django project
